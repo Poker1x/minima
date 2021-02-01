@@ -1,0 +1,48 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories on I&#39;m Poker</title>
+    <link>https://localhost:1313/categories/</link>
+    <description>Recent content in Categories on I&#39;m Poker</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>vi-vn</language>
+    <copyright>©2021 Poker Blog</copyright>
+    <lastBuildDate>Tue, 05 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://localhost:1313/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://localhost:1313/archives/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Emoji Support</title>
+      <link>https://localhost:1313/post/emoji-support/</link>
+      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://localhost:1313/post/emoji-support/</guid>
+      <description>&lt;p&gt;ejshs&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>https://localhost:1313/about/</link>
+      <pubDate>Thu, 28 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://localhost:1313/about/</guid>
+      <description>&lt;p&gt;Hello !. Đây là Blog Chuyên Tám Nhảm Của Tui. Thích Thì Xem Mà Không Thích Thì Xem :))&lt;/p&gt;
+&lt;h1 id=&#34;facebook-&#34;&gt;Facebook :&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://fb.com/poker.0910&#34;&gt;http://fb.com/poker.0910&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
