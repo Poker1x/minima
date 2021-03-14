@@ -6,10 +6,139 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>vi-vn</language>
     <copyright>©2021 Poker Blog</copyright>
-    <lastBuildDate>Tue, 05 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 13 Mar 2021 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Viết Ứng Dụng Calculator Bằng MithrilJs</title>
+      <link>https://localhost:1313/post/viet-calculator-app-bang-mithriljs/</link>
+      <pubDate>Sat, 13 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://localhost:1313/post/viet-calculator-app-bang-mithriljs/</guid>
+      <description>&lt;p&gt;Hello. như Ae biết . bây giờ muốn build 1 ứng dụng frontend thì ta thường nghĩ đến các Framework lớn như Vue,React Angular . ưu điểm của các Framework này đó là nguồn document dồi dào và được support bới các ông lớn. tuy nhiên Framework càng lớn thì thời gian để tìm hiểu, rồi vận dụng hiệu quả càng lâu. đôi khi chúng ta cần 1 framework nhỏ. dễ đọc,dễ học để viết các app nho nhỏ không cần cài đặt lằng nhằng ,nặng nề thì MithrilJs là 1 lựa chọn tuyệt
+vời.&lt;/p&gt;
+&lt;h2 id=&#34;vậy-mithriljs-là-cái-gì-&#34;&gt;Vậy MithrilJs là cái gì ??&lt;/h2&gt;
+&lt;p&gt;Mithril là một JavaScript framework gọn nhẹ nhưng rất mạnh mẽ, được dùng để xây dựng các ứng dụng web một trang (Single Page Applications - SPA). &amp;hellip; Tất cả gói gọn trong một tập tin JS nhỏ hơn 8KB gzip. Giao diện viết bằng mithril có thể hoạt động trên tất cả trình duyệt từ IE9 mà không cần bất cứ polyfill nào&lt;/p&gt;
+&lt;p&gt;Mithril nó là một client-framework theo mô hình MVC, dùng để tổ chức code một cách dễ dàng, sáng sủa để đọc hiểu, cũng là dễ bảo trì hơn sau này. Nó phân chia ứng dụng ra thành ba phần:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Data layer (Model)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UI layer (View)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Glue layer (Controller)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Light-weight&lt;/strong&gt; ( nhẹ )&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Toàn bộ framework chỉ 7.8kb sau khi đã Gzip.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Code độc lập không có dependency.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Robust&lt;/strong&gt; ( mạnh mẽ )&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Nó mặc định là an toàn cho các templates.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sử dụng mô hình MVC cho các components.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Fast&lt;/strong&gt; ( nhanh chóng )&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Có Virtual DOM và compilable templates ( template có thể dịch )&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hệ thống auto-redraw thông minh&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Và đặt biệt Mithril cung cấp cho chúng ta API nhỏ đủ dùng, không quá phức tạp. Đó là lý do nó chỉ vỏn vẹn 7.8kb so với những framework khổng lồ khác.&lt;/p&gt;
+&lt;h2 id=&#34;cùng-viết-1-ứng-dụng-calculator-đơn-giản&#34;&gt;Cùng Viết 1 Ứng Dụng Calculator Đơn Giản&lt;/h2&gt;
+&lt;p&gt;Về căn bản, một ứng dụng viết bằng Mithril sẽ được gắn vào element trong DOM tree bằng hàm &lt;strong&gt;m.mount(el, app)&lt;/strong&gt; . app ở đây có thể là một hoặc nhiều component lồng vào nhau.&lt;/p&gt;
+&lt;p&gt;p/s : &lt;em&gt;Cái Này AE Lên Trang Chủ Của Mithril Để Tìm Hiểu Kĩ Hơn Nha&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;đầu tiên chúng ta hãy code sơ qua giao diện của App.
+có 1 mảng chứa các button text&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;list&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; [&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;AC&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Del&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;÷&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;7&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;8&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;9&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;×&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;4&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;5&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;6&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;-&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt;,&lt;span style=&#34;color:#ae81ff&#34;&gt;3&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;+&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;•&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;=&amp;#34;&lt;/span&gt;]
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;tại sao các phần tử lại lộn xộn thê kia? vì mình cố ý xếp nó như vậy để phù hợp vs giao diện ta thiết kế. ae xem demo sẽ hiểu&lt;/p&gt;
+&lt;p&gt;Tiếp theo ta sẽ viết giao diện&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;App&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+  &lt;span style=&#34;color:#a6e22e&#34;&gt;view&lt;/span&gt;(){
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (
+      &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;div.app&amp;#34;&lt;/span&gt;,[
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;div.head&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;div.screen&amp;#34;&lt;/span&gt;,&lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt;)),
+        &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;div.foot&amp;#34;&lt;/span&gt;,
+          &lt;span style=&#34;color:#a6e22e&#34;&gt;list&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;map&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt; =&amp;gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;m&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;div.button &amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;=&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;equal&amp;#34;&lt;/span&gt;),{ &lt;span style=&#34;color:#a6e22e&#34;&gt;onclick&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt; =&amp;gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;target&lt;/span&gt;) },&lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt;))
+        )
+      ])
+    )
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ae run thử.@@ wtf !? cái mịa gì vậy 🤣 . tất nhiên đó là do chưa css . chạy được là ngon rồi. css vào là ngon ngay ấy mà :))&lt;/p&gt;
+&lt;p&gt;&lt;img  src=&#34;https://i.ibb.co/ScQNX2D/IMG-20210313-222808.jpg&#34;
+        alt=&#34;Demo&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;tiếp theo sẽ là phần xử lý nút bấm. khi bâm vào button nó sẽ làm gì đó. ae để ý đoạn này&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;{ &lt;span style=&#34;color:#a6e22e&#34;&gt;onclick&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt; =&amp;gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;target&lt;/span&gt;) }
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ta đã đặt sự kiện onclick cho hàm click() với đối số truyền vào là phần tử được click.
+chúng ta hãy kiểm tra thử. tạo 1 function là click() và log xem nó có nhận event ko.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;){
+  &lt;span style=&#34;color:#a6e22e&#34;&gt;console&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;log&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;ồ nó đã bắt đc sự kiện.&lt;/p&gt;
+&lt;p&gt;viêt 1 cái Object chứa các hàm là các hành động mà ta muốn thực hiện&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;action&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {
+  &lt;span style=&#34;color:#75715e&#34;&gt;// Hàm Xoá Tất Cả Trên Màn Hình
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;ac&lt;/span&gt;(){
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;
+  },
+  &lt;span style=&#34;color:#75715e&#34;&gt;// Hàm Xoá Từng Kí Tự 1
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;del&lt;/span&gt;(){
+    &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;slice&lt;/span&gt;(&lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;,&lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+  },
+  &lt;span style=&#34;color:#75715e&#34;&gt;// Hàm Hiển Thị Kết Quả
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;(){
+    &lt;span style=&#34;color:#75715e&#34;&gt;// replace các sang các kí tự sang toán tử mà js hiểu
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;str&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;replace&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;/×/g&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;*&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;replace&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;/÷/g&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;).&lt;span style=&#34;color:#a6e22e&#34;&gt;replace&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;/,/g&lt;/span&gt;,&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;)
+    &lt;span style=&#34;color:#75715e&#34;&gt;// Dùng hàm eval để tính
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; eval(&lt;span style=&#34;color:#a6e22e&#34;&gt;str&lt;/span&gt;)
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Cuối Cùng là trong hàm click ta đặt điều kiện để xử lý các hành động mong muốn&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;click&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;){
+  &lt;span style=&#34;color:#66d9ef&#34;&gt;switch&lt;/span&gt;(&lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;innerHTML&lt;/span&gt;){
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;AC&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color:#a6e22e&#34;&gt;action&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;ac&lt;/span&gt;();
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Del&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color:#a6e22e&#34;&gt;action&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;del&lt;/span&gt;();
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;=&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color:#a6e22e&#34;&gt;action&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;equal&lt;/span&gt;();
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;case&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;•&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;,&amp;#34;&lt;/span&gt;;
+      &lt;span style=&#34;color:#66d9ef&#34;&gt;break&lt;/span&gt;;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+      &lt;span style=&#34;color:#a6e22e&#34;&gt;screen&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;e&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;innerHTML&lt;/span&gt;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;tổng-kết&#34;&gt;Tổng Kết&lt;/h2&gt;
+&lt;p&gt;MithrilJs Là 1 framework nhỏ nhẹ và performance là rất tốt. nó còn hỗ trợ Routing,XHR,và stream . ( sẽ nói trong các bài viết sau). đầy đủ để ae viết 1 ứng dụng SPA.
+Mọi người đọc vui vẻ (^_^)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;link github : &lt;a href=&#34;https://github.com/Poker9x/Caculator-App-With-MithrilJs&#34;&gt;https://github.com/Poker9x/Caculator-App-With-MithrilJs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;link demo : &lt;a href=&#34;https://poker9x.github.io/Caculator-App-With-MithrilJs/&#34;&gt;https://poker9x.github.io/Caculator-App-With-MithrilJs/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title></title>
@@ -18,16 +147,6 @@
       
       <guid>https://localhost:1313/archives/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Emoji Support</title>
-      <link>https://localhost:1313/post/emoji-support/</link>
-      <pubDate>Tue, 05 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://localhost:1313/post/emoji-support/</guid>
-      <description>&lt;p&gt;ejshs&lt;/p&gt;
-</description>
     </item>
     
     <item>
